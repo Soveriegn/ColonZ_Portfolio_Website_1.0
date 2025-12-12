@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
+<!-- Navigation Menu -->
 <ul>
   <li><a href="index.html">Home</a></li>
   <li><a href="about.html">About</a></li>
@@ -18,32 +19,58 @@
   </li>
 </ul>
 
+<!-- Main Content -->
 <main class="content">
   <h1>Portfolio</h1>
   <p>Click a thumbnail to view the full image on its own page.</p>
 
+  <!-- Digital Art Section -->
+  <!-- Change IMAGE_LIST in images.js to add/remove images -->
   <section id="digital-art">
     <h2>Digital Art Portfolio</h2>
     <div id="thumbs" class="thumb-grid"></div>
   </section>
 
+  <!-- Code Snippets Section -->
+  <!-- Change CODE_SNIPPETS in images.js to add/remove placeholder images -->
   <section id="code-snippets">
     <h2>Code Snippets</h2>
     <p class="muted">Content coming soon — the same thumbnail layout will be used here.</p>
     <div id="code-thumbs" class="thumb-grid"></div>
   </section>
 
+  <!-- Videos Section -->
+  <!-- Change VIDEOS in images.js to add/remove placeholder images -->
   <section id="videos">
     <h2>Videos</h2>
     <p class="muted">Content coming soon — video thumbnails will appear here.</p>
     <div id="video-thumbs" class="thumb-grid"></div>
   </section>
 
+  <!-- Assets Section -->
+  <!-- Change MODELS_3D, MODELS_2D, AUDIO, ANIMATION arrays in images.js to add/remove placeholders -->
+  <section id="assets">
+    <h2>Assets</h2>
+    <!-- Change MODELS_3D array in images.js to add/remove 3D model placeholders -->
+    <h3>3D Models</h3>
+    <div id="3d-thumbs" class="thumb-grid"></div>
+    <!-- Change MODELS_2D array in images.js to add/remove 2D model placeholders -->
+    <h3>2D Models</h3>
+    <div id="2d-thumbs" class="thumb-grid"></div>
+    <!-- Change AUDIO array in images.js to add/remove audio placeholders -->
+    <h3>Audio</h3>
+    <div id="audio-thumbs" class="thumb-grid"></div>
+    <!-- Change ANIMATION array in images.js to add/remove animation placeholders -->
+    <h3>Animation</h3>
+    <div id="anim-thumbs" class="thumb-grid"></div>
+  </section>
 </main>
 
+<!-- Thumbnail Building Script -->
 <script src="images.js"></script>
 <script>
-// build thumbnails grid
+// buildThumbs Function: build thumbnails grid for digital art
+// Change IMAGE_LIST in images.js to add/remove images
 function buildThumbs() {
   const thumbs = document.getElementById('thumbs');
   if (!thumbs || typeof IMAGE_LIST === 'undefined') return;
@@ -85,10 +112,211 @@ function buildThumbs() {
   });
 }
 
-window.addEventListener('DOMContentLoaded', buildThumbs);
+// buildCodeThumbs Function: build thumbnails for code snippets
+// Change CODE_SNIPPETS in images.js to add/remove placeholders
+function buildCodeThumbs() {
+  const thumbs = document.getElementById('code-thumbs');
+  if (!thumbs || typeof CODE_SNIPPETS === 'undefined') return;
+
+  thumbs.innerHTML = '';
+
+  CODE_SNIPPETS.forEach((name, idx) => {
+    let path = name;
+    if (!path.startsWith('http') && !path.startsWith('/') && !path.startsWith('images/')) {
+      path = 'images/' + path;
+    }
+
+    const a = document.createElement('a');
+    a.href = `photo.html?img=${encodeURIComponent(path)}`; // placeholder link
+    a.className = 'thumb-link';
+
+    const card = document.createElement('div');
+    card.className = 'thumb-card';
+
+    const img = document.createElement('img');
+    img.src = encodeURI(path);
+    img.alt = name;
+    img.loading = 'lazy';
+
+    card.appendChild(img);
+    a.appendChild(card);
+    thumbs.appendChild(a);
+  });
+}
+
+// buildVideoThumbs Function: build thumbnails for videos
+// Change VIDEOS in images.js to add/remove placeholders
+function buildVideoThumbs() {
+  const thumbs = document.getElementById('video-thumbs');
+  if (!thumbs || typeof VIDEOS === 'undefined') return;
+
+  thumbs.innerHTML = '';
+
+  VIDEOS.forEach((name, idx) => {
+    let path = name;
+    if (!path.startsWith('http') && !path.startsWith('/') && !path.startsWith('images/')) {
+      path = 'images/' + path;
+    }
+
+    const a = document.createElement('a');
+    a.href = `photo.html?img=${encodeURIComponent(path)}`; // placeholder link
+    a.className = 'thumb-link';
+
+    const card = document.createElement('div');
+    card.className = 'thumb-card';
+
+    const img = document.createElement('img');
+    img.src = encodeURI(path);
+    img.alt = name;
+    img.loading = 'lazy';
+
+    card.appendChild(img);
+    a.appendChild(card);
+    thumbs.appendChild(a);
+  });
+}
+
+// build3DThumbs Function: build thumbnails for 3D models
+// Change MODELS_3D in images.js to add/remove placeholders
+function build3DThumbs() {
+  const thumbs = document.getElementById('3d-thumbs');
+  if (!thumbs || typeof MODELS_3D === 'undefined') return;
+
+  thumbs.innerHTML = '';
+
+  MODELS_3D.forEach((name, idx) => {
+    let path = name;
+    if (!path.startsWith('http') && !path.startsWith('/') && !path.startsWith('images/')) {
+      path = 'images/' + path;
+    }
+
+    const a = document.createElement('a');
+    a.href = `photo.html?img=${encodeURIComponent(path)}`; // placeholder link
+    a.className = 'thumb-link';
+
+    const card = document.createElement('div');
+    card.className = 'thumb-card';
+
+    const img = document.createElement('img');
+    img.src = encodeURI(path);
+    img.alt = name;
+    img.loading = 'lazy';
+
+    card.appendChild(img);
+    a.appendChild(card);
+    thumbs.appendChild(a);
+  });
+}
+
+// build2DThumbs Function: build thumbnails for 2D models
+// Change MODELS_2D in images.js to add/remove placeholders
+function build2DThumbs() {
+  const thumbs = document.getElementById('2d-thumbs');
+  if (!thumbs || typeof MODELS_2D === 'undefined') return;
+
+  thumbs.innerHTML = '';
+
+  MODELS_2D.forEach((name, idx) => {
+    let path = name;
+    if (!path.startsWith('http') && !path.startsWith('/') && !path.startsWith('images/')) {
+      path = 'images/' + path;
+    }
+
+    const a = document.createElement('a');
+    a.href = `photo.html?img=${encodeURIComponent(path)}`; // placeholder link
+    a.className = 'thumb-link';
+
+    const card = document.createElement('div');
+    card.className = 'thumb-card';
+
+    const img = document.createElement('img');
+    img.src = encodeURI(path);
+    img.alt = name;
+    img.loading = 'lazy';
+
+    card.appendChild(img);
+    a.appendChild(card);
+    thumbs.appendChild(a);
+  });
+}
+
+// buildAudioThumbs Function: build thumbnails for audio
+// Change AUDIO in images.js to add/remove placeholders
+function buildAudioThumbs() {
+  const thumbs = document.getElementById('audio-thumbs');
+  if (!thumbs || typeof AUDIO === 'undefined') return;
+
+  thumbs.innerHTML = '';
+
+  AUDIO.forEach((name, idx) => {
+    let path = name;
+    if (!path.startsWith('http') && !path.startsWith('/') && !path.startsWith('images/')) {
+      path = 'images/' + path;
+    }
+
+    const a = document.createElement('a');
+    a.href = `photo.html?img=${encodeURIComponent(path)}`; // placeholder link
+    a.className = 'thumb-link';
+
+    const card = document.createElement('div');
+    card.className = 'thumb-card';
+
+    const img = document.createElement('img');
+    img.src = encodeURI(path);
+    img.alt = name;
+    img.loading = 'lazy';
+
+    card.appendChild(img);
+    a.appendChild(card);
+    thumbs.appendChild(a);
+  });
+}
+
+// buildAnimThumbs Function: build thumbnails for animation
+// Change ANIMATION in images.js to add/remove placeholders
+function buildAnimThumbs() {
+  const thumbs = document.getElementById('anim-thumbs');
+  if (!thumbs || typeof ANIMATION === 'undefined') return;
+
+  thumbs.innerHTML = '';
+
+  ANIMATION.forEach((name, idx) => {
+    let path = name;
+    if (!path.startsWith('http') && !path.startsWith('/') && !path.startsWith('images/')) {
+      path = 'images/' + path;
+    }
+
+    const a = document.createElement('a');
+    a.href = `photo.html?img=${encodeURIComponent(path)}`; // placeholder link
+    a.className = 'thumb-link';
+
+    const card = document.createElement('div');
+    card.className = 'thumb-card';
+
+    const img = document.createElement('img');
+    img.src = encodeURI(path);
+    img.alt = name;
+    img.loading = 'lazy';
+
+    card.appendChild(img);
+    a.appendChild(card);
+    thumbs.appendChild(a);
+  });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  buildThumbs();
+  buildCodeThumbs();
+  buildVideoThumbs();
+  build3DThumbs();
+  build2DThumbs();
+  buildAudioThumbs();
+  buildAnimThumbs();
+});
 </script>
   </body>
 
+<!-- Footer -->
   <footer>
     <p>© 2025 Digital Media Arts Portfolio by Zachary R. Colon . All rights reserved.</p>
   </footer>

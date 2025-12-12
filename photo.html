@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
+<!-- Navigation Menu -->
 <ul>
   <li><a href="index.html">Home</a></li>
   <li><a href="about.html">About</a></li>
@@ -18,17 +19,21 @@
   </li>
 </ul>
 
+<!-- Photo Container -->
 <div class="photo-container">
   <img id="photo" src="" alt="photo">
 </div>
 
+<!-- Image Loading Script -->
 <script src="images.js"></script>
 <script>
+// getQueryParam Function: Get query parameter from URL
 function getQueryParam(name) {
   const params = new URLSearchParams(window.location.search);
   return params.get(name);
 }
 
+// DOMContentLoaded Event Handler: Load image on page load
 window.addEventListener('DOMContentLoaded', () => {
   const p = getQueryParam('img');
   const imgEl = document.getElementById('photo');
@@ -48,9 +53,9 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script>
-</body>
+  </body>
 
-  <footer>
+<!-- Footer -->
     <p>© 2025 Digital Media Arts Portfolio by Zachary R. Colon . All rights reserved.</p>
   </footer>
   

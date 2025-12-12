@@ -1,3 +1,4 @@
+/* General Styles */
 body {
   margin: 0;
   padding: 0;
@@ -30,6 +31,7 @@ footer {
   margin-bottom: 20px;
 }
 
+/* Navigation Styles */
 ul {
   list-style-type: none;
   margin: 0;
@@ -83,6 +85,7 @@ li.dropdown {
 
 
 
+/* Carousel Styles */
 /* Carousel container and controls */
 #carousel {
   width: 100%;
@@ -160,6 +163,7 @@ li.dropdown {
   background: #333;
 }
 
+/* Portfolio Thumbnail Styles */
 /* Portfolio thumbnail grid: uniform rectangular cards with smooth corners */
 .thumb-grid {
   display: grid;
@@ -199,6 +203,7 @@ li.dropdown {
   display: block;
 }
 
+/* Content Styles */
 .content h2 {
   margin: 18px 16px 8px;
 }
@@ -207,13 +212,14 @@ li.dropdown {
   margin: 0 16px 8px;
 }
 
+/* Centered HR Styles */
 /* Centered HR that only covers the middle 50% and has rounded ends
    Apply by adding the `centered-hr` class to specific <hr> elements. */
 .centered-hr {
   display: block;
   width: 50%;            /* cover middle 50% */
   margin: 24px auto;     /* center horizontally (leaves ~25% space each side) */
-  height: 5px;          /* thickness */
+  height: 3px;          /* thickness */
   border: none;
   background: linear-gradient(90deg, rgba(0,0,0,0.08), rgba(0,0,0,0.12));
   border-radius: 999px;  /* fully rounded ends */

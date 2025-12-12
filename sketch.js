@@ -1,3 +1,4 @@
+// Global Variables
 const NUM_IMGS = 5,
   imgs = [];
 let currentImg = 0;
@@ -9,6 +10,7 @@ const AUTO_ADVANCE_MS = 30 * 1000; // 30 seconds
 // desired aspect ratio (width / height)
 const DESIRED_ASPECT = CAR_W / CAR_H;
 
+// Preload Function
 function preload() {
   // If an external `images.js` defines `IMAGE_LIST`, load those paths.
   if (typeof IMAGE_PATH_LIST === 'function') {
@@ -28,6 +30,7 @@ function preload() {
   }
 }
 
+// Setup Function
 function setup() {
   // Get carousel container dimensions
   const carouselEl = document.getElementById('carousel');
@@ -74,6 +77,7 @@ function setup() {
   });
 }
 
+// Draw Function
 function draw() {
   background(220);
   if (imgs.length === 0 || !imgs[currentImg]) {
@@ -101,6 +105,7 @@ function draw() {
   image(img, dx, dy, dw, dh);
 }
 
+// Setup Buttons Function
 const setupButtons = _ => {
   // create bottom controls row that contains prev button, pagination, next button
   const controlsBottom = createDiv();
@@ -148,6 +153,7 @@ const setupButtons = _ => {
   updatePagination();
 };
 
+// Preprocess Images Function
 // Wire the HTML file-input to load user images
 // Note: image list should be provided in `images.js` as:
 // const IMAGE_LIST = ['images/photo1.jpg', 'images/photo2.jpg', ...];
@@ -179,7 +185,9 @@ function preprocessImages() {
   }
 }
 
-// Move to the next image with wrapping
+// Navigation Functions
+
+// goNext Function: Move to the next image with wrapping
 function goNext() {
   if (imgs.length === 0) return;
   if (currentImg < imgs.length - 1) currentImg++;
@@ -187,7 +195,7 @@ function goNext() {
   updatePagination();
 }
 
-// Move to the previous image with wrapping
+// goPrev Function: Move to the previous image with wrapping
 function goPrev() {
   if (imgs.length === 0) return;
   if (currentImg > 0) currentImg--;
@@ -195,6 +203,7 @@ function goPrev() {
   updatePagination();
 }
 
+// updatePagination Function: Update the active dot in pagination
 function updatePagination() {
   const pag = document.querySelector('.pagination');
   if (!pag) return;
@@ -205,6 +214,7 @@ function updatePagination() {
   });
 }
 
+// resetAutoAdvance Function: Reset the auto-advance timer
 function resetAutoAdvance() {
   if (autoAdvanceIntervalId) {
     clearInterval(autoAdvanceIntervalId);
