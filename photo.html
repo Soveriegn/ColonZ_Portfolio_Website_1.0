@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo - Digital Media Arts</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+<ul>
+  <li><a href="index.html">Home</a></li>
+  <li><a href="about.html">About</a></li>
+  <li class="dropdown">
+    <a href="portfolio.html" class="dropbtn">Portfolio</a>
+    <div class="dropdown-content">
+      <!-- populated dynamically from images.js -->
+    </div>
+  </li>
+</ul>
+
+<div class="photo-container">
+  <img id="photo" src="" alt="photo">
+</div>
+
+<script src="images.js"></script>
+<script>
+function getQueryParam(name) {
+  const params = new URLSearchParams(window.location.search);
+  return params.get(name);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const p = getQueryParam('img');
+  const imgEl = document.getElementById('photo');
+  if (!p) {
+    imgEl.alt = 'No image specified';
+    return;
+  }
+  try {
+    const decoded = decodeURIComponent(p);
+    // ensure URL encoding for browser resource loading
+    imgEl.src = encodeURI(decoded);
+    // optional: set document title
+    const name = decoded.split('/').pop();
+    document.title = name + ' - Photo';
+  } catch (e) {
+    imgEl.alt = 'Invalid image URL';
+  }
+});
+</script>
+</body>
+
+  <footer>
+    <p>© 2025 Digital Media Arts Portfolio by Zachary R. Colon . All rights reserved.</p>
+  </footer>
+  
+</html>

@@ -1,0 +1,41 @@
+//New Button Code - Centered below carousel (Error in positioning based on canvas size). Temp rolling back to 
+//troubleshoot error and determine if canvas size is issue alone or new code needs to be revised further.
+
+// const setupButtons = () => {
+//   const buttonYPosition = height / 2 + imgs[0].height / 2 + 20; // Adjust to center below carousel
+
+//   previous = createButton('Prev');
+//   previous.position(width * 0.5 - 100, buttonYPosition);
+  
+//   previous.mouseClicked(() => {
+//     if (currentImg > 0) {
+//       currentImg--;
+//     }
+//   });
+
+//   next = createButton('Next');
+//   next.position(width * 0.5 + 100, buttonYPosition);
+  
+//   next.mouseClicked(() => {
+//     if (currentImg < imgs.length - 1) {
+//       currentImg++;
+//     }
+//   });
+// };
+
+// Previous Button Code - Aligned over carousel instead of below
+// const setupButtons = _ => {
+//   previous = createButton('Prev');
+//   previous.position(width*0.5 - 100, height + 20);
+  
+//   previous.mouseClicked(_ => {
+//     if (currentImg > 0) currentImg--;
+//   });
+
+//   next = createButton('Next');
+//   next.position(width*0.5 + 100, height + 20);
+  
+//   next.mouseClicked(_ => {
+//     if (currentImg < imgs.length - 1) currentImg++;
+//   });
+// };

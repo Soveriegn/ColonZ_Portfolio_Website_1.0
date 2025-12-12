@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Digital Media Arts</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+<ul>
+  <li><a href="index.html">Home</a></li>
+  <li><a href="about.html">About</a></li>
+  <li class="dropdown">
+    <a href="portfolio.html" class="dropbtn">Portfolio</a>
+    <div class="dropdown-content">
+      <!-- populated dynamically from images.js -->
+    </div>
+  </li>
+</ul>
+
+<main class="content">
+  <h1>Portfolio</h1>
+  <p>Click a thumbnail to view the full image on its own page.</p>
+
+  <section id="digital-art">
+    <h2>Digital Art Portfolio</h2>
+    <div id="thumbs" class="thumb-grid"></div>
+  </section>
+
+  <section id="code-snippets">
+    <h2>Code Snippets</h2>
+    <p class="muted">Content coming soon — the same thumbnail layout will be used here.</p>
+    <div id="code-thumbs" class="thumb-grid"></div>
+  </section>
+
+  <section id="videos">
+    <h2>Videos</h2>
+    <p class="muted">Content coming soon — video thumbnails will appear here.</p>
+    <div id="video-thumbs" class="thumb-grid"></div>
+  </section>
+
+</main>
+
+<script src="images.js"></script>
+<script>
+// build thumbnails grid
+function buildThumbs() {
+  const thumbs = document.getElementById('thumbs');
+  if (!thumbs || typeof IMAGE_LIST === 'undefined') return;
+
+  // clear existing
+  thumbs.innerHTML = '';
+
+  IMAGE_LIST.forEach((name, idx) => {
+    // decode any percent-encoding (e.g. 'Image%209.jpg' -> 'Image 9.jpg')
+    let decodedName = name;
+    try {
+      decodedName = decodeURIComponent(name);
+    } catch (e) {
+      decodedName = name;
+    }
+
+    // compute path: prefix with images/ if not present
+    let path = decodedName;
+    if (!path.startsWith('http') && !path.startsWith('/') && !path.startsWith('images/')) {
+      path = 'images/' + path;
+    }
+
+    const a = document.createElement('a');
+    a.href = `photo.html?img=${encodeURIComponent(path)}`;
+    a.className = 'thumb-link';
+
+    const card = document.createElement('div');
+    card.className = 'thumb-card';
+
+    const img = document.createElement('img');
+    // ensure the src is a valid URL (encode spaces/special chars)
+    img.src = encodeURI(path);
+    img.alt = decodedName;
+    img.loading = 'lazy';
+
+    card.appendChild(img);
+    a.appendChild(card);
+    thumbs.appendChild(a);
+  });
+}
+
+window.addEventListener('DOMContentLoaded', buildThumbs);
+</script>
+  </body>
+
+  <footer>
+    <p>© 2025 Digital Media Arts Portfolio by Zachary R. Colon . All rights reserved.</p>
+  </footer>
+  
+</html>
