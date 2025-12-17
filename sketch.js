@@ -1,31 +1,32 @@
 // Global Variables
-const NUM_IMGS = 5,
-  imgs = [];
-let currentImg = 0;
-const CAR_W = 640, CAR_H = 360;
-let canvasEl, controls;
-let autoAdvanceIntervalId = null;
-const AUTO_ADVANCE_MS = 30 * 1000; // 30 seconds
+const NUM_IMGS = 5, // number of images in the carousel
+  imgs = []; // array to hold loaded images
+let currentImg = 0; // current image index
+const CAR_W = 640, CAR_H = 360; // carousel width and height
+let canvasEl, controls; // canvas element and controls
+let autoAdvanceIntervalId = null; // auto-advance timer ID
+const AUTO_ADVANCE_MS = 30 * 1000; // 30 seconds before auto-advancing
 
-// desired aspect ratio (width / height)
-const DESIRED_ASPECT = CAR_W / CAR_H;
+// desired aspect ratio (width / height) -AI 
+//const DESIRED_ASPECT = CAR_W / CAR_H;
 
 // Preload Function
 function preload() {
-  // If an external `images.js` defines `IMAGE_LIST`, load those paths.
-  if (typeof IMAGE_PATH_LIST === 'function') {
-    const list = IMAGE_PATH_LIST();
-    for (let i = 0; i < list.length; i++) {
-      imgs[i] = loadImage(list[i]);
+  // If an external `images.js` defines `IMAGE_LIST`, load those paths. - Meant for testing, inital carousel creation assitance from W3Schools
+  //Reuseable code for loading images from external sources from other porfolio sources.
+  if (typeof IMAGE_PATH_LIST === 'function') { // if IMAGE_PATH_LIST is a function, use it to get image paths
+    const list = IMAGE_PATH_LIST(); // get list of image paths
+    for (let i = 0; i < list.length; i++) { // load each image
+      imgs[i] = loadImage(list[i]); // load image from path
     }
-  } else if (typeof IMAGE_LIST !== 'undefined' && Array.isArray(IMAGE_LIST) && IMAGE_LIST.length > 0) {
-    for (let i = 0; i < IMAGE_LIST.length; i++) {
-      imgs[i] = loadImage(IMAGE_LIST[i]);
+  } else if (typeof IMAGE_LIST !== 'undefined' && Array.isArray(IMAGE_LIST) && IMAGE_LIST.length > 0) { // if IMAGE_LIST is defined, use those images
+    for (let i = 0; i < IMAGE_LIST.length; i++) { // load each image
+      imgs[i] = loadImage(IMAGE_LIST[i]); // load image from path
     }
   } else {
-    // fallback demo images
-    for (let i = 0; i < NUM_IMGS; i++) {
-      imgs[i] = loadImage(`https://picsum.photos/${CAR_W}/${CAR_H}/?random?sig=${i}`);
+    // fallback demo images from first instance of carousel before improvements
+    for (let i = 0; i < NUM_IMGS; i++) { // load placeholder images from picsum.photos
+      imgs[i] = loadImage(`https://picsum.photos/${CAR_W}/${CAR_H}/?random?sig=${i}`); // load random image- us this to randomize demo images
     }
   }
 }
@@ -33,18 +34,18 @@ function preload() {
 // Setup Function
 function setup() {
   // Get carousel container dimensions
-  const carouselEl = document.getElementById('carousel');
-  const containerW = carouselEl.offsetWidth;
-  const containerH = carouselEl.offsetHeight;
+  const carouselEl = document.getElementById('carousel'); // Get carousel div
+  const containerW = carouselEl.offsetWidth; // Get container width
+  const containerH = carouselEl.offsetHeight; // Get container height
 
-  canvasEl = createCanvas(containerW, containerH);
-  canvasEl.parent('carousel');
+  canvasEl = createCanvas(containerW, containerH); // Create canvas with container dimensions
+  canvasEl.parent('carousel'); // Attach canvas to carousel div
 
-  // Make canvas clickable: open the photo page for the currently shown image
-  if (canvasEl && typeof canvasEl.mouseClicked === 'function') {
-    canvasEl.mouseClicked(() => {
-      if (!imgs || imgs.length === 0) return;
-      // determine path for current image. Prefer IMAGE_PATH_LIST if available
+  // Clickable Convas: opens the photo page for the currently shown image
+  if (canvasEl && typeof canvasEl.mouseClicked === 'function') { // if canvas supports mouseClicked
+    canvasEl.mouseClicked(() => { // on canvas click
+      if (!imgs || imgs.length === 0) return; //If there are no images it terminates the function early
+      // determine path for current image. Prefer IMAGE_PATH_LIST if available 
       let targetPath = null;
       if (typeof IMAGE_PATH_LIST === 'function') {
         const list = IMAGE_PATH_LIST();
@@ -65,11 +66,11 @@ function setup() {
     });
   }
 
-  setupButtons();
-  preprocessImages();
+  setupButtons(); // setup carousel buttons and pagination
+  preprocessImages(); // preprocess images to fit carousel (needed for performance and proper display given my images different sizes)
   // start auto-advance timer
-  if (autoAdvanceIntervalId) clearInterval(autoAdvanceIntervalId);
-  autoAdvanceIntervalId = setInterval(goNext, AUTO_ADVANCE_MS);
+  if (autoAdvanceIntervalId) clearInterval(autoAdvanceIntervalId); //
+  autoAdvanceIntervalId = setInterval(goNext, AUTO_ADVANCE_MS); // auto-advance every 30 seconds
 
   // clear timer on page unload
   window.addEventListener('beforeunload', () => {

@@ -2,9 +2,6 @@
 document.addEventListener('DOMContentLoaded', function() {
   const navbarHTML = `
 <nav>
-  <div class="logo">
-    <img src="logo.png" alt="Digital Media Arts Logo">
-  </div>
   <ul>
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>

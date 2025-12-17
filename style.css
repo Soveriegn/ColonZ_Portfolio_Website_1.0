@@ -2,6 +2,7 @@
 body {
   margin: 0;
   padding: 0;
+  margin-top: 60px;
 }
 
 h1, p {
@@ -44,25 +45,17 @@ footer {
 nav {
   background-color: #38444d;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 0 10px;
   height: 60px;
   box-sizing: border-box;
   flex-wrap: nowrap;
-}
-
-.logo {
-  position: absolute;
-  top: 25px;
-  left: 10px;
-  transform: translateY(-50%);
-  z-index: 1;
-}
-
-.logo img {
-  height: 40px;
-  width: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 1000;
 }
 
 ul {
@@ -74,15 +67,22 @@ ul {
   flex-wrap: nowrap;
 }
 
+/* Depricated Style-Keeping to avoid breaking changes
 li {
-}
+} 
+*/
 
 li a, .dropbtn {
   display: inline-block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  padding: 14px 28px;
   text-decoration: none;
+  transition: background 0.2s;
+}
+
+li:not(:last-child) a, li:not(:last-child) .dropbtn {
+  margin-right: 8px;
 }
 
 li a:hover, .dropdown:hover .dropbtn {
@@ -151,7 +151,6 @@ li.dropdown {
 }
 
 /* Edge buttons */
-
 /* Bottom controls row: left button, centered pagination, right button */
 .controls-bottom {
   position: absolute;
@@ -197,7 +196,7 @@ li.dropdown {
 }
 
 /* Portfolio Thumbnail Styles */
-/* Portfolio thumbnail grid: uniform rectangular cards with smooth corners */
+/* Portfolio thumbnail grid: uniform rectangular cards with beveled corners */
 .thumb-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -246,8 +245,8 @@ li.dropdown {
 }
 
 /* Centered HR Styles */
-/* Centered HR that only covers the middle 50% and has rounded ends
-   Apply by adding the `centered-hr` class to specific <hr> elements. */
+/* Centered HR, only covers the middle 50%, and has beveled ends
+   Instructions if you : Apply by adding the `centered-hr` class to specific <hr> elements. */
 .centered-hr {
   display: block;
   width: 50%;            /* cover middle 50% */
@@ -259,7 +258,7 @@ li.dropdown {
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25) inset;
 }
 
-/* Slightly narrower on small screens to keep nice spacing */
+/* Narrower on small screens to keep spacing looking crisp*/
 @media (max-width: 480px) {
   .centered-hr { width: 60%; margin: 16px auto; height: 8px; }
 }
